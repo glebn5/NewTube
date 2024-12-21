@@ -1,0 +1,12 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+    <div class="cat-grid">
+    {% for cat in category %}
+        <div class="item">
+            <a href="{% url 'category' cat.id %}">{{cat}}</a>
+        </div>
+        
+    {% endfor %}
+    </div>
+{% endblock content %}

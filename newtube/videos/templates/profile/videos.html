@@ -1,0 +1,69 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="flex">
+        <img class="channel-avatar" src="/media/{{user_v.avatar}}">
+        <div>
+            <h1 class="channel-name">{{ user_v.name_channel }}</h1>
+            <p class="subscribers">{{user_v.number_of_subscribers}} subscribers</p>
+        </div>
+         
+        {% if user.is_authenticated %}
+            {% if request.user.id != user_v.id %}
+                {% if request.user in user_v.subscribers.all %}
+                    <a href="{% url 'follow' user_v.id %}" class="follow">отписаться</a>
+                {% else %}
+                    <a href="{% url 'follow' user_v.id %}" class="follow">Подписаться</a>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+        
+    </div>
+    
+    <div class="channel-nav">
+        <a class="active" href="{% url 'videos' user_v.id %}">Видео</a>
+        <a href="{% url 'about_channel' user_v.id %}">О канале</a>
+        <a href="{% url 'profile' user_v.id %}">Профиль</a>
+        {% if request.user.id == user_v.id %}
+            <a href="{% url 'add_video' %}">Добавить видео</a>
+        {% endif %}
+    </div>
+    <div class="video-list">
+        {% for video in videos %}
+            {% if user_v.id == video.user.id %}
+
+                    <div>
+                        <a href="{% url 'video' video.id %}">
+                            <img class="preview" src="/media/{{video.preview}}">
+                        </a>
+
+                        <div class="video-text align-center">    
+                            <a href="{% url 'videos' video.user.id %}" class="avatar-link">
+                                <img class="user-link" src="/media/{{user_v.avatar}}">
+                            </a>
+                            <div class="right">
+                                <p class="video-title">
+                                    <a href="{% url 'video' video.id %}" class="video-title-link">
+                                        {{ video.title }}
+                                    </a>
+                                </p>
+                                {% if request.user.id == user_v.id %}
+                                    <p><a class="video-name-channel-link" href="{% url 'video_edit' video.id %}">Редактировать видео</a></p>
+                                    <p><a class="video-name-channel-link" href="{% url 'video_delete' video.id %}">Удалить видео</a></p>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+
+            {% endif %}
+        {% endfor %}
+        
+
+</div>
+
+    
+
+    
+{% endblock content %}

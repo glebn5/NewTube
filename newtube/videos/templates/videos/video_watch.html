@@ -1,0 +1,89 @@
+
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+    <div class="video-flex">
+        <video controls>
+            <source src="/media/{{video.video_file}}">
+        </video>
+        <p class="video-desc">{{video.description|linebreaksbr}}</p>
+        
+    </div>
+
+    <h1 class="video-title title">{{ video.title }}</h1>
+
+    <div class="video-text">
+        <a href="{% url 'videos' video.user.id %}" class="avatar-link">
+            <img class="user-link" src="/media/{{video.user.avatar}}">
+        </a>
+        <div class="right mw">
+            <p class="video-title mw">
+                <a href="{% url 'videos' video.user.id %}" class="video-title-link">
+                    {{ video.user.name_channel }}
+                </a>
+            </p>
+            <p class="name_channel">
+                <a href="#" class="video-name-channel-link">
+                    {{ video.user.number_of_subscribers }} subscribers
+                </a>
+            </p>
+        </div>
+        <div class="reaction-flex">
+            <a href="{% url 'video_like' video.id %}">
+                <div class="react">
+                    <img src="/media/images/like.png" alt="">
+                    <p class="num-react">{{ video.number_of_likes}}</p>
+                </div>
+            </a>
+            <a href="{% url 'video_dislike' video.id %}">
+                <div class="react">
+                    <img src="/media/images/dislike.png" alt="">
+                    <p class="num-react">{{ video.number_of_dislikes}}</p>
+                </div>
+            </a> 
+        </div>
+    </div>
+
+
+    
+
+    <div class="comment-flex">
+        {% if user.is_authenticated and user.avatar %}
+				
+			<div class="user-icon nml">
+				<a href="{% url 'videos' user.id %}" class="user-link"><img class="user-icon-img" src="/media/{{user.avatar}}" alt=""></a>
+			</div>
+            <form method="POST" class="comment-form">
+                {%csrf_token%}
+                <span class="comment-input">{{ form.text }}</span>
+                <input type="image" src="/media/images/submit.png" alt="Submit" class="submit">
+            </form>
+				
+		{% else %}
+			<a href="{% url 'register' %}" class="user-link">
+				<div class="icon nml"></div>
+			</a>
+            <form method="POST" class="comment-form">
+                {%csrf_token%}
+                <span class="comment-input">{{ form.text }}</span>
+                <input type="image" src="/media/images/submit.png" alt="Submit" class="submit">
+            </form>
+		{% endif %}
+
+    
+    
+    </div>
+    <div class="comments">
+        {% for comm in comment %}
+            <div class="one-comment">
+                <a href="{% url 'videos' comm.user.id %}" class="user-link"><img class="user-icon-img" src="/media/{{comm.user.avatar}}" alt=""></a>
+                <p>{{ comm.text }}</p>
+            </div>
+
+        {% empty %}
+            <p class="empty">Оставьте первый комментарий</p>
+        {% endfor %}
+    </div>
+
+    
+{% endblock content %}

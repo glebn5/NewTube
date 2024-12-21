@@ -1,0 +1,19 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="channel-nav">
+        <a class="active" href="{% url 'videos' video_delete.id %}">Удаление видео</a>
+        <a href="{% url 'about_channel' video_delete.id %}">О канале</a>
+        <a href="{% url 'profile' video_delete.id %}">Профиль</a>
+        {% if request.user.id == video_delete.user.id %}
+            <a href="{% url 'add_video' %}">Добавить видео</a>
+        {% endif %}
+    </div>
+
+    <form method="POST" enctype='multipart/form-data' class="block-auth">
+        {%csrf_token%}
+        <div class="form__block-submit"><input type="submit" value="Удалить видео"></div>
+    </form>
+
+{% endblock content %}

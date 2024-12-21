@@ -1,0 +1,38 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+    <h1 class="title">{{category.title}}</h1>
+    <div class="video-list">
+        
+            {% for video in videos_list %}
+                <div class="video">
+                    <a href="{% url 'video' video.id %}">
+                        <img class="preview" src="/media/{{video.preview}}">
+                    </a>
+
+                    <div class="video-text">
+                        <a href="{% url 'videos' video.user.id %}" class="avatar-link">
+                            <img class="user-link" src="/media/{{video.user.avatar}}">
+                        </a>
+                        <div class="right">
+                            <p class="video-title">
+                                <a href="{% url 'video' video.id %}" class="video-title-link">
+                                    {{ video.title }}
+                                </a>
+                            </p>
+                            <p class="name_channel">
+                                <a href="{% url 'videos' video.user.id %}" class="video-name-channel-link">
+                                    {{ video.user.name_channel }}
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+    </div>
+    
+    <!-- {% if not video_list %}
+        {{video_list}}
+        <h2 class="empty">Пока нет видео в данной категории</h2>
+    {% endif %} -->
+{% endblock content %}

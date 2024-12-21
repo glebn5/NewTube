@@ -1,0 +1,9 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+    <div class="centered-block">
+        <p><a href="{% url 'login' %}">Login</a></p>
+        <p><a href="{% url 'register' %}">Register</a></p>
+    </div>
+
+{% endblock content %}

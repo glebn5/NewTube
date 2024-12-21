@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>NewTube</title>
+	<link rel="stylesheet" href="{% static 'base/style.css' %}">
+	<link rel="stylesheet" href="{% static 'base/reset.css' %}">
+	<script src="{% static 'base/script.js' %}" defer></script>
+</head>
+<body>
+	<div class="container">
+		<header class="header">
+			<div class="burger" id="burger">
+				<div class="line"></div>
+				<div class="line"></div>
+				<div class="line"></div>
+			</div>
+			<nav class="menu" id="menu">
+				<ul>
+					{% if user.is_authenticated %}
+						<li><a href="{% url 'sub_videos' %}">Подписки</a></li>
+					{% endif %}
+					<li><a href="{% url 'cat_list' %}">Категории</a></li>
+					{% if user.is_authenticated and user.avatar %}
+						<div class="user-icon h355">
+							<a href="{% url 'videos' user.id %}" class="user-link"><img class="user-icon-img" src="/media/{{request.user.avatar}}" alt=""></a>
+						</div>
+					{% else %}
+						<a href="{% url 'auth' %}" class="user-link h355">
+							<div class="icon"></div>
+						</a>
+					{% endif %}
+					<a href="{% url 'main_page' %}" class="link-logo h850"><div class="logo"><img src="/media/images/logo.png"></div></a>
+				</ul>
+			</nav>
+			<a href="{% url 'main_page' %}" class="link-logo w850"><div class="logo"><img src="/media/images/logo.png"></div></a>
+			<form method="GET" class="search-container">
+				<input type="text" class="search-input" name="search-input" placeholder="Введите запрос здесь">
+				<button class="search-button" type="submit">
+					<img src="/media/images/finder.svg" alt="Search" class="search-icon">
+				</button>
+			</form>
+			{% if user.is_authenticated and user.avatar %}
+				
+					<div class="user-icon w355">
+						<a href="{% url 'videos' user.id %}" class="user-link"><img class="user-icon-img" src="/media/{{request.user.avatar}}" alt=""></a>
+					</div>
+				
+			{% else %}
+				<a href="{% url 'auth' %}" class="user-link w355">
+					<div class="icon">
+					</div>
+				</a>
+			{% endif %}
+		</header>
+		
+		{% block content %}
+		
+		{% endblock content %}
+
+		<!-- <footer>
+			сдеалано нови
+		</footer> -->
+	</div>
+</body>
+</html>

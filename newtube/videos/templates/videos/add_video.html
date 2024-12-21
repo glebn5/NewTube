@@ -1,0 +1,32 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="flex">
+        <img class="channel-avatar" src="/media/{{user.avatar}}">
+        <div>
+            <h1 class="channel-name">{{ user.name_channel }}</h1>
+            <p class="subscribers">{{user.number_of_subscribers}} subscribers</p>
+        </div>
+        
+    </div>
+
+    <div class="channel-nav">
+        <a href="{% url 'videos' user.id %}">Видео</a>
+        <a href="{% url 'about_channel' user.id %}">О канале</a>
+        <a href="{% url 'profile' user.id %}">Профиль</a>
+        {% if request.user.id == user.id %}
+            <a class="active" href="{% url 'add_video' %}">Добавление видео</a>
+        {% endif %}
+    </div>
+
+    <form method="POST" enctype='multipart/form-data' class="block-auth">
+        {%csrf_token%}
+        <p><label class="f-label" for="{{ form.title.id_for_label }}">{{form.title.label}}: </label>{{ form.title }}</p>
+        <p><label class="f-label" for="{{ form.description.id_for_label }}">{{form.description.label}}: </label>{{ form.description }}</p>
+        <p><label class="f-label" for="{{ form.video_file.id_for_label }}">{{form.video_file.label}}: </label>{{ form.video_file }}</p>
+        <p><label class="f-label" for="{{ form.preview.id_for_label }}">Preview: </label>{{ form.preview }}</p>
+        <p><label class="f-label" for="{{ form.tags.id_for_label }}">Категория: </label>{{ form.tags }}</p>
+        <div class="form__block-submit"><input type="submit" value="Add video"></div>
+    </form>
+{% endblock content %}  

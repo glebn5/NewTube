@@ -1,0 +1,17 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+    <h1 class="title">Register</h1>
+
+    <form method="POST" class="block-auth">
+        {%csrf_token%}
+
+        <p><label class="f-label" for="{{ form.username.id_for_label }}">{{form.username.label}}: </label>{{ form.username }}</p>
+        <p><label class="f-label" for="{{ form.name_channel.id_for_label }}">{{form.name_channel.label}}: </label>{{ form.name_channel }}</p>
+        <p><label class="f-label" for="{{ form.email.id_for_label }}">{{form.email.label}}: </label>{{ form.email }}</p>
+        <p><label class="f-label" for="{{ form.password1.id_for_label }}">{{form.password1.label}}: </label>{{ form.password1 }}</p>
+        <p><label class="f-label" for="{{ form.password2.id_for_label }}">{{form.password2.label}}: </label>{{ form.password2 }}</p>
+        <div class="form__block-submit"><input type="submit" value="Save"></div>
+
+    </form>
+{% endblock content %}

@@ -1,0 +1,52 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="flex">
+        <img class="channel-avatar" src="/media/{{profile.avatar}}">
+        <div>
+            <h1 class="channel-name">{{ profile.name_channel }}</h1>
+            <p class="subscribers">{{profile.number_of_subscribers}} subscribers</p>
+        </div>
+         
+        {% if user.is_authenticated %}
+            {% if request.user.id != profile.id %}
+                {% if request.user in profile.subscribers.all %}
+                    <a href="{% url 'follow' profile.id %}" class="follow">отписаться</a>
+                {% else %}
+                    <a href="{% url 'follow' profile.id %}" class="follow">Подписаться</a>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+        
+    </div>
+    
+    <div class="channel-nav">
+        <a href="   {% url 'videos' profile.id %}">Видео</a>
+        <a href="{% url 'about_channel' profile.id %}">О канале</a>
+        <a class="active" href="{% url 'profile' profile.id %}">Профиль</a>
+        {% if request.user.id == profile.id %}
+            <a href="{% url 'add_video' %}">Добавить видео</a>
+        {% endif %}
+    </div>
+
+    <div class="description">
+        <p class="desc-field"><span class="desc-field-title">Nickname</span> - <span class="desc-field-value">{{ profile.username }}</span></p>
+        <p class="desc-field"><span class="desc-field-title">Имя</span> - <span class="desc-field-value">{{ profile.first_name }}</span></p>
+        <p class="desc-field"><span class="desc-field-title">Фамилия</span> - <span class="desc-field-value">{{ profile.last_name }}</span></p>
+        <p class="desc-field"><span class="desc-field-title">Почта</span> - <span class="desc-field-value">{{ profile.email }}</span></p>
+        {% if request.user.id == profile.id %}
+            <a href="{% url 'profile_edit' profile.id %}" class="desc-flex"><img src="/media/images/editing.png" alt="">Edit profile</a>
+        {% endif %}  
+
+        {% if request.user.id == profile.id %}
+    
+            <form method="post" action="{% url 'logout' %}" class="mt-10px"> 
+                {% csrf_token %}
+                
+                <button type="submit"><img src="/media/images/logout.png">Выход</button>
+            </form>
+        {% endif %}
+    </div>
+    
+{% endblock content %}

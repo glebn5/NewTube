@@ -1,0 +1,13 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+    <h1 class="title">Login</h1>
+
+    <form method="POST" class="block-auth">
+        {%csrf_token%}
+        <p><label class="f-label" for="{{ form.username.id_for_label }}">{{form.username.label}}: </label>{{ form.username }}</p>
+        <p><label class="f-label" for="{{ form.password.id_for_label }}">{{form.password.label}}: </label>{{ form.password }}</p>
+        <div class="form__block-submit"><input type="submit" value="Save"></div>
+
+    </form>
+{% endblock content %}

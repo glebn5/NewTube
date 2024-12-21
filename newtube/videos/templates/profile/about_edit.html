@@ -1,0 +1,61 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+    <!-- Username - {{ user.username }} <br>
+    first_name - {{ user.first_name }} <br>
+    last_name - {{ user.last_name }} <br>
+    password - {{ user.password }} <br>
+    email - {{ user.email}} <br>
+    date_joined - {{ user.date_joined }} <br>
+    name_channel - {{ user.name_channel }} <br>
+    channel_description - {{ user.channel_description }} <br>
+    avatar - <p><img class="img-article-left" src="/media/{{user.avatar}}"></p> <br>
+    subscribers - {{ user.subscribers }} <br> -->
+
+    <div class="flex">
+        <img class="channel-avatar" src="/media/{{about_channel_edit.avatar}}">
+        <div>
+            <h1 class="channel-name">{{ about_channel_edit.name_channel }}</h1>
+            <p class="subscribers">{{about_channel_edit.number_of_subscribers}} subscribers</p>
+        </div>
+         
+        {% if user.is_authenticated %}
+            {% if request.user.id != about_channel_edit.id %}
+                {% if request.user in about_channel_edit.subscribers.all %}
+                    <a href="{% url 'follow' about_channel_edit.id %}" class="follow">отписаться</a>
+                {% else %}
+                    <a href="{% url 'follow' about_channel_edit.id %}" class="follow">Подписаться</a>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+        
+    </div>
+
+    <div class="channel-nav">
+        <a href="{% url 'videos' about_channel_edit.id %}">Videos</a>
+        <a class="active" href="{% url 'about_channel' about_channel_edit.id %}">About channel</a>
+        <a href="{% url 'profile' about_channel_edit.id %}">Profile</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'add_video' %}">Добавить видео</a>
+        {% endif %}
+    </div>
+
+    <div class="description">
+        <form method="POST" enctype='multipart/form-data'>
+            {%csrf_token%}
+            <div class="desc-form">{{ form.channel_description}}</div>
+            <div class="form__block-submit"><input type="submit" value="Save"></div>
+        </form>
+        <div class="desc-flex"><img src="/media/images/subscribers.png" alt="">{{about_channel_edit.number_of_subscribers}} subscribers</div>
+        <div class="desc-flex"><img src="/media/images/calendar.png" alt="">{{ about_channel_edit.date_joined }}</div>
+    </div>
+
+    <!-- <a href="{% url 'about_channel_edit' about_channel_edit.id %}">Edit</a>
+    <a href="{% url 'add_video' %}">Добавить видео<a>
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'logout' %}"> 
+            {% csrf_token %}
+            <button type="submit">Выход</button>
+        </form>
+    {% endif %} -->
+{% endblock content %}
