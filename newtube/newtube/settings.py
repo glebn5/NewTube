@@ -75,17 +75,27 @@ WSGI_APPLICATION = 'newtube.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'django',
+#         'USER': 'django_admin',
+#         'PASSWORD': 'password',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django',
-        'USER': 'django_admin',
-        'PASSWORD': 'password',
-        'HOST': '127.0.0.1',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'default_db',
+        'USER': 'gen_user',
+        'PASSWORD': '3O8Lt%3D%23u%25TH%2FG7',
+        'HOST': '109.196.102.229',
         'PORT': '5432',
     }
 }
-
 
 
 # Password validation
