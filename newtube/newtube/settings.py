@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'newtube.wsgi.application'
 #         'NAME': 'django',
 #         'USER': 'django_admin',
 #         'PASSWORD': 'password',
-#         'HOST': '127.0.0.1',
+#         'HOST': '127.0.0.1',  
 #         'PORT': '5432',
 #     }
 # }
@@ -91,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'default_db',
         'USER': 'gen_user',
-        'PASSWORD': '3O8Lt%3D%23u%25TH%2FG7',
+        'PASSWORD': '3O8Lt=#u%TH/G7',
         'HOST': '109.196.102.229',
         'PORT': '5432',
     }
