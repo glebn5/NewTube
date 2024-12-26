@@ -145,3 +145,7 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'videos.User'
+CSRF_TRUSTED_ORIGINS = [
+    'https://glebn5-youtube-1d92.twc1.net',
+    'http://glebn5-youtube-1d92.twc1.net',
+]
