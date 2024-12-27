@@ -24,8 +24,8 @@ SECRET_KEY = 'django-insecure-$3fd6=i**+dvhp5f^)yqooa3#-uy-373!8#g%s^5s^)9sy#m9k
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = ['glebn5-youtube-1d92.twc1.net']
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['glebn5-youtube-1d92.twc1.net']
         
 
 # Application definition
@@ -75,27 +75,27 @@ WSGI_APPLICATION = 'newtube.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django',
-        'USER': 'django_admin',
-        'PASSWORD': 'password',
-        'HOST': '127.0.0.1',  
-        'PORT': '5432',
-    }
-}
-# код ниже для деплоя
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'default_db',
-#         'USER': 'gen_user',
-#         'PASSWORD': '3O8Lt=#u%TH/G7',
-#         'HOST': '109.196.102.229',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'django',
+#         'USER': 'django_admin',
+#         'PASSWORD': 'password',
+#         'HOST': '127.0.0.1',  
 #         'PORT': '5432',
 #     }
 # }
+# код ниже для деплоя
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'default_db',
+        'USER': 'gen_user',
+        'PASSWORD': '3O8Lt=#u%TH/G7',
+        'HOST': '109.196.102.229',
+        'PORT': '5432',
+    }
+}
 
 
 # Password validation
@@ -145,7 +145,7 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'videos.User'
-# CSRF_TRUSTED_ORIGINS = [
-#     'https://glebn5-youtube-1d92.twc1.net',
-#     'http://glebn5-youtube-1d92.twc1.net',
-# ]
+CSRF_TRUSTED_ORIGINS = [
+    'https://glebn5-youtube-1d92.twc1.net',
+    'http://glebn5-youtube-1d92.twc1.net',
+]
