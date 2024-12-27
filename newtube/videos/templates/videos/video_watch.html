@@ -28,20 +28,22 @@
                 </a>
             </p>
         </div>
-        <div class="reaction-flex">
-            <a href="{% url 'video_like' video.id %}">
-                <div class="react">
-                    <img src="/media/images/like.png" alt="">
-                    <p class="num-react">{{ video.number_of_likes}}</p>
-                </div>
-            </a>
-            <a href="{% url 'video_dislike' video.id %}">
-                <div class="react">
-                    <img src="/media/images/dislike.png" alt="">
-                    <p class="num-react">{{ video.number_of_dislikes}}</p>
-                </div>
-            </a> 
-        </div>
+        {% if user.is_authenticated %}
+            <div class="reaction-flex">
+                <a href="{% url 'video_like' video.id %}">
+                    <div class="react">
+                        <img src="/media/images/like.png" alt="">
+                        <p class="num-react">{{ video.number_of_likes}}</p>
+                    </div>
+                </a>
+                <a href="{% url 'video_dislike' video.id %}">
+                    <div class="react">
+                        <img src="/media/images/dislike.png" alt="">
+                        <p class="num-react">{{ video.number_of_dislikes}}</p>
+                    </div>
+                </a> 
+            </div>
+        {% endif %}
     </div>
 
 
