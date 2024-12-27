@@ -44,12 +44,19 @@
 					<img src="/media/images/finder.svg" alt="Search" class="search-icon">
 				</button>
 			</form>
-			{% if user.is_authenticated and user.avatar %}
-				
+			{% if user.is_authenticated %}
+				{% if user.avatar %}
 					<div class="user-icon w355">
 						<a href="{% url 'videos' user.id %}" class="user-link"><img class="user-icon-img" src="/media/{{request.user.avatar}}" alt=""></a>
 					</div>
-				
+				{% else %}
+					<div class="user-icon w355">
+						<a href="{% url 'videos' user.id %}" class="user-link">
+							<div class="icon">
+							</div>
+						</a>
+					</div>
+				{% endif %}
 			{% else %}
 				<a href="{% url 'auth' %}" class="user-link w355">
 					<div class="icon">

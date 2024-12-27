@@ -228,6 +228,8 @@ class ProfileEdit(UpdateView):
     def get_success_url(self):
         user_id = self.request.user.id  # Получаем ID пользователя из запроса
         return reverse_lazy('profile', kwargs={'pk': user_id})
+    
+
 
 class CatList(ListView):
     model = Tags
