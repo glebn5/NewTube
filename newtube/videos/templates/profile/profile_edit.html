@@ -43,7 +43,7 @@
     </div>
 
     <div class="description">
-        <form method="POST" class="block-auth">
+        <form method="POST" class="block-auth" enctype="multipart/form-data">
             {%csrf_token%}
             <p><label class="f-label" for="{{ form.username.id_for_label }}">Nickname: </label>{{ form.username }}</p>
             <p><label class="f-label" for="{{ form.first_name.id_for_label }}">Name: </label>{{ form.first_name }}</p>
