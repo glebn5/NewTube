@@ -7,6 +7,7 @@
 - [Описание](#описание)
 - [Требования](#требования)
 - [Установка и запуск](#установка-и-запуск)
+- [Деплой](#Деплой)
 
 ## Описание
 
@@ -41,3 +42,8 @@
     ```python manage.py migrate```  
 5. Измените ```ALLOWED_HOSTS = ['glebn5-youtube-1d92.twc1.net']``` на ```ALLOWED_HOSTS = []``` и запустите сервер:  
     ```python manage.py runserver```
+
+## Деплой
+
+Деплой произвел в сервисе timeweb.cloud, используя apps Django и DBaaS Postgresql
+Просмотреть получившийся результат можно [здесь](https://glebn5-youtube-1d92.twc1.net) до 23 января
